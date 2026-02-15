@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lynn Investments Ltd | Multi-Family Real Estate Investment</title>
+    <meta name="description" content="Lynn Investments Ltd specializes in multi-family real estate acquisitions, portfolio management, and strategic consulting for real estate developers.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0a1628;
+            --navy-light: #132040;
+            --gold: #b8924a;
+            --gold-light: #d4ad5e;
+            --cream: #f8f6f1;
+            --white: #ffffff;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Playfair Display', Georgia, serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--gray-800);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(184, 146, 74, 0.15);
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.25rem; font-weight: 600;
+            color: var(--white); letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: var(--gray-400); text-decoration: none;
+            font-size: 0.875rem; font-weight: 500;
+            letter-spacing: 0.5px; text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+        .nav-toggle svg { width: 24px; height: 24px; stroke: var(--white); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(165deg, var(--navy) 0%, var(--navy-light) 50%, #1a2d4a 100%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b8924a' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-content {
+            text-align: center; padding: 2rem;
+            position: relative; z-index: 1;
+            max-width: 900px;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(184, 146, 74, 0.12);
+            border: 1px solid rgba(184, 146, 74, 0.25);
+            border-radius: 100px; padding: 0.5rem 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .hero-badge span {
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--gold); letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 600; color: var(--white);
+            line-height: 1.15; margin-bottom: 1.5rem;
+        }
+        .hero h1 em {
+            font-style: normal; color: var(--gold);
+        }
+        .hero p {
+            font-size: 1.15rem; color: var(--gray-400);
+            max-width: 600px; margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            background: var(--gold); color: var(--navy);
+            padding: 1rem 2.25rem; border-radius: 4px;
+            text-decoration: none; font-weight: 600;
+            font-size: 0.9rem; letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        .hero-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+        .hero-cta svg { width: 18px; height: 18px; }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 4rem;
+            margin-top: 4rem; padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .hero-stat h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem; color: var(--gold); font-weight: 600;
+        }
+        .hero-stat p {
+            font-size: 0.8rem; color: var(--gray-400);
+            text-transform: uppercase; letter-spacing: 1.5px;
+            margin: 0;
+        }
+
+        /* SECTIONS */
+        section { padding: 6rem 2rem; }
+        .section-inner { max-width: 1100px; margin: 0 auto; }
+        .section-label {
+            font-size: 0.75rem; font-weight: 600;
+            color: var(--gold); letter-spacing: 2.5px;
+            text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600; color: var(--navy);
+            margin-bottom: 1.25rem; line-height: 1.25;
+        }
+        .section-subtitle {
+            font-size: 1.05rem; color: var(--gray-500);
+            max-width: 640px; line-height: 1.7;
+        }
+
+        /* ABOUT */
+        .about { background: var(--white); }
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 4rem; align-items: center; margin-top: 3rem;
+        }
+        .about-text p {
+            color: var(--gray-600); line-height: 1.8;
+            margin-bottom: 1.25rem; font-size: 1.02rem;
+        }
+        .about-pillars {
+            display: grid; gap: 1.5rem;
+        }
+        .pillar {
+            background: var(--gray-100);
+            border-radius: 8px; padding: 1.75rem;
+            border-left: 3px solid var(--gold);
+            transition: transform 0.3s;
+        }
+        .pillar:hover { transform: translateX(4px); }
+        .pillar h4 {
+            font-size: 1rem; font-weight: 600;
+            color: var(--navy); margin-bottom: 0.5rem;
+        }
+        .pillar p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.6; }
+
+        /* SERVICES */
+        .services { background: var(--navy); }
+        .services .section-label { color: var(--gold); }
+        .services .section-title { color: var(--white); }
+        .services .section-subtitle { color: var(--gray-400); }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; margin-top: 3rem;
+        }
+        .service-card {
+            background: var(--navy-light);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px; padding: 2.5rem 2rem;
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            border-color: rgba(184, 146, 74, 0.3);
+            transform: translateY(-4px);
+        }
+        .service-icon {
+            width: 48px; height: 48px;
+            background: rgba(184, 146, 74, 0.1);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .service-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+        .service-card h3 {
+            font-size: 1.15rem; font-weight: 600;
+            color: var(--white); margin-bottom: 0.75rem;
+        }
+        .service-card p { font-size: 0.925rem; color: var(--gray-400); line-height: 1.7; }
+        .service-features {
+            list-style: none; margin-top: 1.25rem;
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .service-features li {
+            font-size: 0.85rem; color: var(--gray-400);
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .service-features li::before {
+            content: '';
+            width: 5px; height: 5px;
+            background: var(--gold); border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* LEADERSHIP */
+        .leadership { background: var(--cream); }
+        .leader-card {
+            display: grid; grid-template-columns: 300px 1fr;
+            gap: 3rem; margin-top: 3rem;
+            background: var(--white);
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .leader-photo {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 3rem; min-height: 380px;
+        }
+        .leader-initials {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 2px solid rgba(184, 146, 74, 0.4);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 2.5rem; color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .leader-photo h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+        .leader-photo p {
+            font-size: 0.85rem; color: var(--gold);
+            letter-spacing: 1px; text-transform: uppercase;
+        }
+        .leader-bio {
+            padding: 3rem 3rem 3rem 0;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        .leader-bio p {
+            color: var(--gray-600); line-height: 1.8;
+            margin-bottom: 1rem; font-size: 0.975rem;
+        }
+        .leader-credentials {
+            display: flex; flex-wrap: wrap; gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .credential {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--gray-100); border-radius: 100px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem; color: var(--gray-600); font-weight: 500;
+        }
+        .credential svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 2; }
+
+        /* APPROACH */
+        .approach { background: var(--white); }
+        .approach-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 2rem; margin-top: 3rem;
+        }
+        .approach-step {
+            text-align: center; padding: 2rem 1.5rem;
+            position: relative;
+        }
+        .approach-step::after {
+            content: '';
+            position: absolute; top: 2.75rem; right: -1rem;
+            width: 2rem; height: 1px;
+            background: var(--gold); opacity: 0.4;
+        }
+        .approach-step:last-child::after { display: none; }
+        .step-num {
+            font-family: var(--font-serif);
+            font-size: 2rem; color: var(--gold);
+            font-weight: 600; margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .approach-step h4 {
+            font-size: 1rem; font-weight: 600;
+            color: var(--navy); margin-bottom: 0.75rem;
+        }
+        .approach-step p {
+            font-size: 0.875rem; color: var(--gray-500); line-height: 1.7;
+        }
+
+        /* CONTACT */
+        .contact { background: var(--navy); }
+        .contact .section-title { color: var(--white); }
+        .contact .section-subtitle { color: var(--gray-400); }
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 3rem; margin-top: 3rem;
+        }
+        .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-item {
+            display: flex; align-items: flex-start; gap: 1rem;
+        }
+        .contact-item-icon {
+            width: 44px; height: 44px; flex-shrink: 0;
+            background: rgba(184, 146, 74, 0.1);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .contact-item-icon svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+        .contact-item h4 {
+            font-size: 0.95rem; color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+        .contact-item p { font-size: 0.9rem; color: var(--gray-400); }
+        .contact-item a { color: var(--gold); text-decoration: none; }
+        .contact-item a:hover { text-decoration: underline; }
+
+        .contact-form {
+            display: flex; flex-direction: column; gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--navy-light);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px; padding: 0.9rem 1.1rem;
+            color: var(--white); font-family: var(--font-sans);
+            font-size: 0.925rem; transition: border-color 0.3s;
+        }
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder { color: var(--gray-500); }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .contact-form textarea { resize: vertical; min-height: 120px; }
+        .contact-form button {
+            background: var(--gold); color: var(--navy);
+            border: none; border-radius: 4px;
+            padding: 1rem 2rem; font-weight: 600;
+            font-size: 0.9rem; cursor: pointer;
+            letter-spacing: 0.5px; transition: all 0.3s;
+            align-self: flex-start;
+        }
+        .contact-form button:hover { background: var(--gold-light); }
+
+        /* FOOTER */
+        footer {
+            background: #060e1a;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        footer p {
+            font-size: 0.8rem; color: var(--gray-500);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: var(--navy);
+                padding: 1.5rem 2rem; gap: 1rem;
+                border-top: 1px solid rgba(255,255,255,0.06);
+            }
+            .nav-toggle { display: block; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .leader-card { grid-template-columns: 1fr; }
+            .leader-bio { padding: 2rem; }
+            .leader-photo { min-height: 280px; }
+            .approach-grid { grid-template-columns: 1fr 1fr; }
+            .approach-step::after { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .approach-grid { grid-template-columns: 1fr; }
+            section { padding: 4rem 1.25rem; }
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<nav id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Lynn <span>Investments</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </div>
+</nav>
+
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span>Multi-Family Real Estate Investment</span>
+        </div>
+        <h1>Building Lasting Value in <em>Multi-Family</em> Real Estate</h1>
+        <p>Lynn Investments Ltd identifies, acquires, and manages high performing multi-family properties, delivering consistent returns through disciplined investment strategy and hands on portfolio management.</p>
+        <a href="#contact" class="hero-cta">
+            Start a Conversation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <h3>Multi-Family</h3>
+                <p>Asset Focus</p>
+            </div>
+            <div class="hero-stat">
+                <h3>Toronto</h3>
+                <p>Primary Market</p>
+            </div>
+            <div class="hero-stat">
+                <h3>Full Cycle</h3>
+                <p>Investment Approach</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="section-inner">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">Investment Philosophy</h2>
+        <p class="section-subtitle">Grounded in fundamentals. Focused on long term value creation through strategic multi-family acquisitions.</p>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>Lynn Investments Ltd is a private real estate investment firm specializing in multi-family residential properties. We believe that well located, professionally managed apartment buildings represent one of the most resilient and rewarding asset classes in real estate.</p>
+                <p>Our approach combines rigorous underwriting with active asset management to unlock value at every stage of the investment lifecycle. From acquisition through stabilization and long term hold, we focus on properties where operational improvements and strategic repositioning can drive meaningful returns.</p>
+                <p>We partner with investors who share our long term perspective and commitment to building portfolios of enduring quality.</p>
+            </div>
+            <div class="about-pillars">
+                <div class="pillar">
+                    <h4>Disciplined Underwriting</h4>
+                    <p>Every acquisition is evaluated through a rigorous analytical framework focused on fundamental value drivers and downside protection.</p>
+                </div>
+                <div class="pillar">
+                    <h4>Active Management</h4>
+                    <p>We take a hands on approach to property operations, identifying opportunities to improve performance and enhance asset value from day one.</p>
+                </div>
+                <div class="pillar">
+                    <h4>Long Term Orientation</h4>
+                    <p>Our investment horizon allows us to make decisions that compound value over time rather than chase short term gains.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services" id="services">
+    <div class="section-inner">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">From acquisition to optimization, we provide comprehensive real estate investment and advisory services.</p>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <h3>Multi-Family Acquisitions</h3>
+                <p>We source, evaluate, and acquire multi-family residential properties in high demand markets with strong fundamentals and upside potential.</p>
+                <ul class="service-features">
+                    <li>Market analysis and deal sourcing</li>
+                    <li>Financial modeling and underwriting</li>
+                    <li>Due diligence and closing</li>
+                    <li>Capital structuring</li>
+                </ul>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                </div>
+                <h3>Portfolio Management</h3>
+                <p>Our active management approach focuses on operational excellence, tenant satisfaction, and continuous value enhancement across every property we oversee.</p>
+                <ul class="service-features">
+                    <li>Property operations optimization</li>
+                    <li>Revenue management strategy</li>
+                    <li>Capital improvement planning</li>
+                    <li>Performance reporting</li>
+                </ul>
+            </div>
+            <div class="service-card fade-in">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                </div>
+                <h3>Developer Consulting</h3>
+                <p>Strategic advisory for real estate developers seeking to optimize profitability and scale their operations in competitive markets.</p>
+                <ul class="service-features">
+                    <li>Profit optimization analysis</li>
+                    <li>Expansion strategy development</li>
+                    <li>Operational efficiency reviews</li>
+                    <li>Market positioning guidance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="leadership" id="leadership">
+    <div class="section-inner">
+        <span class="section-label">Leadership</span>
+        <h2 class="section-title">Meet Our CEO</h2>
+        <div class="leader-card fade-in">
+            <div class="leader-photo">
+                <div class="leader-initials">EE</div>
+                <h3>Evan Ekstein</h3>
+                <p>Chief Executive Officer</p>
+            </div>
+            <div class="leader-bio">
+                <p>Evan Ekstein founded Lynn Investments Ltd with a clear vision: to build a portfolio of high quality multi-family properties that generate consistent, long term value for investors. His approach combines institutional rigor with entrepreneurial agility, allowing the firm to identify and capitalize on opportunities that larger players often overlook.</p>
+                <p>With a Master's degree in Real Estate Development from Nova Southeastern University, Evan brings deep academic grounding and practical expertise to every investment decision. His education provided a comprehensive foundation in development finance, market analysis, and the strategic frameworks that guide the firm's investment thesis.</p>
+                <p>As a licensed Royal LePage real estate agent in Toronto, Evan maintains direct market insight and relationships across the Greater Toronto Area's dynamic real estate landscape. This on the ground presence informs the firm's acquisition strategy and provides a competitive edge in sourcing off market opportunities.</p>
+                <p>Beyond investing, Evan advises real estate developers on profit optimization and expansion strategy, helping them scale their businesses and maximize returns across their development pipelines.</p>
+                <div class="leader-credentials">
+                    <span class="credential">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        M.S. Real Estate Development, Nova Southeastern University
+                    </span>
+                    <span class="credential">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                        Licensed Royal LePage Agent, Toronto
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="approach" id="approach">
+    <div class="section-inner">
+        <span class="section-label">Our Process</span>
+        <h2 class="section-title">Investment Approach</h2>
+        <p class="section-subtitle">A methodical, four stage process that guides every investment from initial evaluation through long term value realization.</p>
+        <div class="approach-grid">
+            <div class="approach-step fade-in">
+                <div class="step-num">01</div>
+                <h4>Identify</h4>
+                <p>We continuously monitor target markets for multi-family properties that meet our investment criteria, leveraging proprietary deal flow and established broker relationships.</p>
+            </div>
+            <div class="approach-step fade-in">
+                <div class="step-num">02</div>
+                <h4>Evaluate</h4>
+                <p>Each opportunity undergoes comprehensive financial analysis, physical inspection, and market assessment to validate the investment thesis and quantify risk adjusted returns.</p>
+            </div>
+            <div class="approach-step fade-in">
+                <div class="step-num">03</div>
+                <h4>Execute</h4>
+                <p>Upon acquisition, we implement a tailored business plan focused on operational improvements, capital enhancements, and revenue optimization to unlock embedded value.</p>
+            </div>
+            <div class="approach-step fade-in">
+                <div class="step-num">04</div>
+                <h4>Optimize</h4>
+                <p>Ongoing active management ensures each asset performs at its highest potential, with regular performance reviews and strategic adjustments to maximize long term returns.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="section-inner">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Start a Conversation</h2>
+        <p class="section-subtitle">Whether you are exploring investment opportunities or seeking strategic advisory services, we would welcome the chance to connect.</p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-item-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:info@lynninvestments.com">info@lynninvestments.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>Toronto, Ontario, Canada</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-item-icon">
+                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+                    </div>
+                    <div>
+                        <h4>Focus</h4>
+                        <p>Multi-Family Residential Investment</p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="text" name="subject" placeholder="Subject">
+                <textarea name="message" placeholder="Tell us about your inquiry..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Lynn Investments Ltd. All rights reserved.</p>
+</footer>
+
+<script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile nav
+    document.getElementById('navToggle').addEventListener('click', () => {
+        document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button');
+        btn.textContent = 'Message Sent';
+        btn.style.background = '#22c55e';
+        setTimeout(() => {
+            btn.textContent = 'Send Message';
+            btn.style.background = '';
+            this.reset();
+        }, 3000);
+    });
+</script>
+
+</body>
+</html>
